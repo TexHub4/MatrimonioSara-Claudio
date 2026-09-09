@@ -11,11 +11,11 @@
 <style>
 
 .emoji-marker {
-    font-size: 38px;
+    background: transparent !important;
+    border: none !important;
+    font-size: 40px;
     text-align: center;
     line-height: 40px;
-    background: transparent;
-    border: none;
 }
 
 *{
@@ -117,6 +117,9 @@ href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
     border-radius:15px;
     margin-top:20px;
     margin-bottom:20px;
+}
+    .leaflet-container {
+    border-radius: 15px;
 }
 </style>
 </head>
@@ -255,30 +258,29 @@ function updateCountdown(){
 
 updateCountdown();
 
-</script>
-
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
 <script>
 
 const map = L.map('map');
 
 L.tileLayer(
-'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-{
-    attribution: '© OpenStreetMap'
-}).addTo(map);
+    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    {
+        attribution: '&copy; OpenStreetMap contributors'
+    }
+).addTo(map);
 
 const churchIcon = L.divIcon({
     html: "⛪",
     className: "emoji-marker",
-    iconSize: [40, 40]
+    iconSize: [40, 40],
+    iconAnchor: [20, 20]
 });
 
 const receptionIcon = L.divIcon({
     html: "🥂",
     className: "emoji-marker",
-    iconSize: [40, 40]
+    iconSize: [40, 40],
+    iconAnchor: [20, 20]
 });
 
 const church = L.marker(
@@ -301,18 +303,14 @@ reception.bindPopup(`
     <p>Tenuta Cambiaga</p>
 `);
 
-const group = new L.featureGroup([
+const group = L.featureGroup([
     church,
     reception
 ]);
 
 map.fitBounds(
-    group.getBounds().pad(0.30)
+    group.getBounds().pad(0.3)
 );
-{
-    weight: 4
-}
-).addTo(map);
 
 </script>
     
