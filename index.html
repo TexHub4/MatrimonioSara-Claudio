@@ -263,18 +263,18 @@ L.tileLayer(
     attribution: '© OpenStreetMap'
 }).addTo(map);
 
-const church = L.marker([45.4554, 8.8154])
-.addTo(map)
-.bindPopup(
-    "<b>⛪ Santuario della Madonna dell'Acquanegra</b>"
-);
+const churchIcon = L.divIcon({
+    html: "⛪",
+    className: "emoji-marker",
+    iconSize: [40, 40]
+});
 
-const reception = L.marker([45.4121, 8.8563])
-.addTo(map)
-.bindPopup(
-    "<b>🥂 Tenuta Cambiaga</b>"
-);
-
+const receptionIcon = L.divIcon({
+    html: "🥂",
+    className: "emoji-marker",
+    iconSize: [40, 40]
+});
+    
 const group = new L.featureGroup([
     church,
     reception
