@@ -99,6 +99,18 @@ body{
 }
 
 </style>
+    <link rel="stylesheet"
+href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+<style>
+#map{
+    height:450px;
+    width:100%;
+    border-radius:15px;
+    margin-top:20px;
+    margin-bottom:20px;
+}
+</style>
 </head>
 <body>
 
@@ -119,20 +131,15 @@ body{
         </p>
     </div>
 
-    <div class="card">
+   <div class="card">
     <h2>📍 Luoghi del matrimonio</h2>
 
     <p>
-        La cerimonia si terrà presso il Santuario della Madonna dell'Acqua Nera,
-        mentre il ricevimento avrà luogo presso la Tenuta Cambiaga.
+        La cerimonia si terrà presso il Santuario della Madonna dell'Acquanegra,
+        mentre il ricevimento avrà luogo presso Tenuta Cambiaga.
     </p>
 
-    <iframe
-        src="https://www.openstreetmap.org/export/embed.html"
-        width="100%"
-        height="400"
-        style="border:none;border-radius:15px;margin-top:20px;">
-    </iframe>
+    <div id="map"></div>
 
     <a class="btn"
        target="_blank"
@@ -147,6 +154,7 @@ body{
        href="https://maps.app.goo.gl/h2ePBcRYj4hf1GyH7">
         🥂 Apri il Ricevimento
     </a>
+</div>
 
 </div>
 
@@ -243,5 +251,50 @@ updateCountdown();
 
 </script>
 
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+
+const map = L.map('map');
+
+L.tileLayer(
+'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+{
+    attribution: '© OpenStreetMap'
+}).addTo(map);
+
+const church = L.marker([45.4554, 8.8154])
+.addTo(map)
+.bindPopup(
+    "<b>⛪ Santuario della Madonna dell'Acquanegra</b>"
+);
+
+const reception = L.marker([45.4121, 8.8563])
+.addTo(map)
+.bindPopup(
+    "<b>🥂 Tenuta Cambiaga</b>"
+);
+
+const group = new L.featureGroup([
+    church,
+    reception
+]);
+
+map.fitBounds(
+    group.getBounds().pad(0.25)
+);
+
+L.polyline(
+[
+    [45.4554, 8.8154],
+    [45.4121, 8.8563]
+],
+{
+    weight: 4
+}
+).addTo(map);
+
+</script>
+    
 </body>
 </html>
