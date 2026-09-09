@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Matrimonio di Sara e Claudio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Montserrat',sans-serif;
+    background:#f9f7f4;
+    color:#333;
+}
+
+.hero{
+    min-height:50vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:40px 20px;
+    background:linear-gradient(
+        rgba(255,255,255,0.75),
+        rgba(255,255,255,0.75)
+    ),
+    url("cover.jpg");
+    background-size:cover;
+    background-position:center;
+}
+
+.hero h1{
+    font-family:'Playfair Display',serif;
+    font-size:3rem;
+    margin-bottom:10px;
+}
+
+.hero h2{
+    font-weight:300;
+}
+
+.container{
+    max-width:700px;
+    margin:auto;
+    padding:40px 20px;
+}
+
+.card{
+    background:white;
+    padding:25px;
+    border-radius:20px;
+    margin-bottom:20px;
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
+}
+
+.card h3{
+    margin-bottom:15px;
+}
+
+.btn{
+    display:block;
+    width:100%;
+    text-align:center;
+    text-decoration:none;
+    color:white;
+    background:#9b7b58;
+    padding:15px;
+    margin-top:10px;
+    border-radius:12px;
+    transition:.2s;
+}
+
+.btn:hover{
+    opacity:.9;
+}
+
+.iban{
+    background:#f3f3f3;
+    padding:15px;
+    border-radius:10px;
+    margin-top:10px;
+    word-break:break-all;
+}
+
+.copyBtn{
+    border:none;
+    cursor:pointer;
+}
+
+.footer{
+    text-align:center;
+    padding:30px;
+    color:#666;
+}
+
+.countdown{
+    font-size:1.2rem;
+    margin-top:15px;
+    font-weight:600;
+}
+
+</style>
+</head>
+<body>
+
+<section class="hero">
+    <h1>Giulia & Marco</h1>
+    <h2>15 Giugno 2027</h2>
+    <div class="countdown" id="countdown"></div>
+</section>
+
+<div class="container">
+
+    <div class="card">
+        <h3>📍 Cerimonia</h3>
+
+        <a class="btn"
+           href="https://maps.google.com"
+           target="_blank">
+            Apri Google Maps
+        </a>
+    </div>
+
+    <div class="card">
+        <h3>🥂 Ricevimento</h3>
+
+        <a class="btn"
+           href="https://maps.google.com"
+           target="_blank">
+            Apri Google Maps
+        </a>
+    </div>
+
+    <div class="card">
+        <h3>📅 Programma</h3>
+
+        <p>11:00 - Cerimonia</p>
+        <p>13:00 - Aperitivo</p>
+        <p>14:00 - Pranzo</p>
+        <p>18:00 - Torta</p>
+        <p>22:00 - Open Bar</p>
+    </div>
+
+    <div class="card">
+        <h3>🎁 Regalo di nozze</h3>
+
+        <p>Se desiderate contribuire al nostro futuro insieme:</p>
+
+        <div class="iban" id="iban">
+            IT12X1234567890123456
+        </div>
+
+        <a class="btn copyBtn"
+           onclick="copyIBAN()">
+            Copia IBAN
+        </a>
+    </div>
+
+    <div class="card">
+        <h3>📸 Foto degli invitati</h3>
+
+        <a class="btn"
+           href="https://photos.google.com"
+           target="_blank">
+            Carica le tue foto
+        </a>
+    </div>
+
+    <div class="card">
+        <h3>🏨 Hotel consigliati</h3>
+
+        <p>Hotel 1</p>
+        <p>Hotel 2</p>
+        <p>Hotel 3</p>
+    </div>
+
+    <div class="card">
+        <h3>📞 Contatti utili</h3>
+
+        <p>Sposo: +39 xxx xxx xxxx</p>
+        <p>Sposa: +39 xxx xxx xxxx</p>
+    </div>
+
+</div>
+
+<div class="footer">
+    Vi aspettiamo ❤️
+</div>
+
+<script>
+
+function copyIBAN() {
+
+    const iban =
+        document.getElementById("iban").innerText;
+
+    navigator.clipboard.writeText(iban);
+
+    alert("IBAN copiato!");
+}
+
+const weddingDate =
+    new Date("2027-06-15T11:00:00");
+
+function updateCountdown() {
+
+    const now = new Date();
+
+    const diff = weddingDate - now;
+
+    const days =
+        Math.floor(diff / (1000*60*60*24));
+
+    document.getElementById("countdown")
+        .innerText =
+        days + " giorni al matrimonio";
+}
+
+updateCountdown();
+
+</script>
+
+</body>
+</html>
