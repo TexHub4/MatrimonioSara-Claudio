@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Matrimonio di Sara e Claudio</title>
+
+<title>Sara & Claudio - 27 Maggio 2027</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 
@@ -17,95 +18,84 @@
 
 body{
     font-family:'Montserrat',sans-serif;
-    background:#f9f7f4;
+    background:#faf8f5;
     color:#333;
 }
 
 .hero{
-    min-height:50vh;
+    min-height:100vh;
     display:flex;
-    flex-direction:column;
     justify-content:center;
     align-items:center;
+    flex-direction:column;
     text-align:center;
-    padding:40px 20px;
+    padding:20px;
     background:linear-gradient(
-        rgba(255,255,255,0.75),
-        rgba(255,255,255,0.75)
-    ),
-    url("cover.jpg");
-    background-size:cover;
-    background-position:center;
+        rgba(255,255,255,.75),
+        rgba(255,255,255,.75)
+    );
 }
 
 .hero h1{
     font-family:'Playfair Display',serif;
-    font-size:3rem;
+    font-size:4rem;
     margin-bottom:10px;
 }
 
-.hero h2{
-    font-weight:300;
+.hero p{
+    font-size:1.2rem;
+}
+
+.countdown{
+    margin-top:20px;
+    font-size:1.3rem;
+    font-weight:600;
 }
 
 .container{
-    max-width:700px;
+    max-width:900px;
     margin:auto;
     padding:40px 20px;
 }
 
 .card{
     background:white;
-    padding:25px;
     border-radius:20px;
-    margin-bottom:20px;
-    box-shadow:0 4px 15px rgba(0,0,0,.08);
+    padding:30px;
+    margin-bottom:25px;
+    box-shadow:0 4px 12px rgba(0,0,0,.08);
 }
 
-.card h3{
+.card h2{
     margin-bottom:15px;
+    font-family:'Playfair Display',serif;
 }
 
 .btn{
-    display:block;
-    width:100%;
-    text-align:center;
+    display:inline-block;
     text-decoration:none;
+    background:#9d8461;
     color:white;
-    background:#9b7b58;
-    padding:15px;
-    margin-top:10px;
+    padding:12px 20px;
     border-radius:12px;
-    transition:.2s;
+    margin-top:15px;
 }
 
 .btn:hover{
     opacity:.9;
 }
 
-.iban{
-    background:#f3f3f3;
+.footer{
+    text-align:center;
+    padding:40px;
+    color:#777;
+}
+
+.placeholder{
+    background:#f5f5f5;
     padding:15px;
     border-radius:10px;
     margin-top:10px;
-    word-break:break-all;
-}
-
-.copyBtn{
-    border:none;
-    cursor:pointer;
-}
-
-.footer{
-    text-align:center;
-    padding:30px;
-    color:#666;
-}
-
-.countdown{
-    font-size:1.2rem;
-    margin-top:15px;
-    font-weight:600;
 }
 
 </style>
@@ -113,115 +103,109 @@ body{
 <body>
 
 <section class="hero">
-    <h1>Giulia & Marco</h1>
-    <h2>15 Giugno 2027</h2>
+    <h1>Sara & Claudio</h1>
+    <p>27 Maggio 2027</p>
+
     <div class="countdown" id="countdown"></div>
 </section>
 
 <div class="container">
 
     <div class="card">
-        <h3>📍 Cerimonia</h3>
+        <h2>❤️ Benvenuti</h2>
+        <p>
+            Siamo felici di condividere con voi il nostro giorno speciale.
+            In questa pagina troverete tutte le informazioni utili per partecipare al nostro matrimonio.
+        </p>
+    </div>
+
+    <div class="card">
+        <h2>⛪ Cerimonia</h2>
+
+        <p>
+            Santuario della Madonna dell'Acqua Nera
+        </p>
 
         <a class="btn"
-           href="https://maps.google.com"
-           target="_blank">
-            Apri Google Maps
+           target="_blank"
+           href="https://maps.app.goo.gl/X2fGcMozwE1N7Dyx5">
+            Apri su Google Maps
         </a>
     </div>
 
     <div class="card">
-        <h3>🥂 Ricevimento</h3>
+        <h2>🥂 Ricevimento</h2>
+
+        <p>
+            Tenuta Cambiaga
+        </p>
 
         <a class="btn"
-           href="https://maps.google.com"
-           target="_blank">
-            Apri Google Maps
+           target="_blank"
+           href="https://maps.app.goo.gl/KaTbuyGj7Jqa3VGBA">
+            Apri su Google Maps
         </a>
     </div>
 
     <div class="card">
-        <h3>📅 Programma</h3>
+        <h2>📅 Programma della giornata</h2>
 
-        <p>11:00 - Cerimonia</p>
-        <p>13:00 - Aperitivo</p>
-        <p>14:00 - Pranzo</p>
-        <p>18:00 - Torta</p>
-        <p>22:00 - Open Bar</p>
-    </div>
-
-    <div class="card">
-        <h3>🎁 Regalo di nozze</h3>
-
-        <p>Se desiderate contribuire al nostro futuro insieme:</p>
-
-        <div class="iban" id="iban">
-            IT12X1234567890123456
+        <div class="placeholder">
+            Programma in fase di definizione.
         </div>
-
-        <a class="btn copyBtn"
-           onclick="copyIBAN()">
-            Copia IBAN
-        </a>
     </div>
 
     <div class="card">
-        <h3>📸 Foto degli invitati</h3>
+        <h2>🎁 Lista nozze</h2>
 
-        <a class="btn"
-           href="https://photos.google.com"
-           target="_blank">
-            Carica le tue foto
-        </a>
+        <div class="placeholder">
+            Informazioni disponibili a breve.
+        </div>
     </div>
 
     <div class="card">
-        <h3>🏨 Hotel consigliati</h3>
+        <h2>📸 Foto degli invitati</h2>
 
-        <p>Hotel 1</p>
-        <p>Hotel 2</p>
-        <p>Hotel 3</p>
+        <div class="placeholder">
+            Album fotografico condiviso disponibile a breve.
+        </div>
     </div>
 
     <div class="card">
-        <h3>📞 Contatti utili</h3>
+        <h2>✅ Conferma presenza</h2>
 
-        <p>Sposo: +39 xxx xxx xxxx</p>
-        <p>Sposa: +39 xxx xxx xxxx</p>
+        <div class="placeholder">
+            Modulo RSVP disponibile a breve.
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>📞 Contatti utili</h2>
+
+        <div class="placeholder">
+            I contatti dei testimoni saranno pubblicati prossimamente.
+        </div>
     </div>
 
 </div>
 
 <div class="footer">
-    Vi aspettiamo ❤️
+    Sara & Claudio • 27 Maggio 2027
 </div>
 
 <script>
 
-function copyIBAN() {
+const weddingDate = new Date("2027-05-27T15:00:00");
 
-    const iban =
-        document.getElementById("iban").innerText;
-
-    navigator.clipboard.writeText(iban);
-
-    alert("IBAN copiato!");
-}
-
-const weddingDate =
-    new Date("2027-06-15T11:00:00");
-
-function updateCountdown() {
+function updateCountdown(){
 
     const now = new Date();
 
     const diff = weddingDate - now;
 
-    const days =
-        Math.floor(diff / (1000*60*60*24));
+    const days = Math.floor(diff/(1000*60*60*24));
 
-    document.getElementById("countdown")
-        .innerText =
+    document.getElementById("countdown").innerHTML =
         days + " giorni al matrimonio";
 }
 
