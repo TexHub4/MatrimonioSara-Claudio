@@ -122,6 +122,8 @@ href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
     border-radius: 15px;
 }
 </style>
+    <link rel="stylesheet"
+href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css">
 </head>
 <body>
 
@@ -262,6 +264,8 @@ updateCountdown();
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
+<script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+
 <script>
 
 const map = L.map('map');
@@ -276,15 +280,15 @@ L.tileLayer(
 const churchIcon = L.divIcon({
     html: "⛪",
     className: "emoji-marker",
-    iconSize: [40, 40],
-    iconAnchor: [20, 20]
+    iconSize: [40,40],
+    iconAnchor: [20,20]
 });
 
 const receptionIcon = L.divIcon({
     html: "🥂",
     className: "emoji-marker",
-    iconSize: [40, 40],
-    iconAnchor: [20, 20]
+    iconSize: [40,40],
+    iconAnchor: [20,20]
 });
 
 const church = L.marker(
@@ -292,20 +296,10 @@ const church = L.marker(
     { icon: churchIcon }
 ).addTo(map);
 
-church.bindPopup(`
-    <h3>⛪ Cerimonia</h3>
-    <p>Santuario della Madonna dell'Acquanegra</p>
-`);
-
 const reception = L.marker(
     [45.4121, 8.8563],
     { icon: receptionIcon }
 ).addTo(map);
-
-reception.bindPopup(`
-    <h3>🥂 Ricevimento</h3>
-    <p>Tenuta Cambiaga</p>
-`);
 
 const group = L.featureGroup([
     church,
@@ -316,7 +310,19 @@ map.fitBounds(
     group.getBounds().pad(0.3)
 );
 
+L.Routing.control({
+    waypoints: [
+        L.latLng(45.4554, 8.8154),
+        L.latLng(45.4121, 8.8563)
+    ],
+    routeWhileDragging: false,
+    addWaypoints: false,
+    draggableWaypoints: false,
+    fitSelectedRoutes: true,
+    show: false
+}).addTo(map);
+
 </script>
-    
+
 </body>
 </html>
