@@ -10,6 +10,14 @@
 
 <style>
 
+.emoji-marker {
+    font-size: 38px;
+    text-align: center;
+    line-height: 40px;
+    background: transparent;
+    border: none;
+}
+
 *{
     margin:0;
     padding:0;
@@ -156,8 +164,6 @@ href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
     </a>
 </div>
 
-</div>
-
    <div class="card">
     <h2>📅 Salva la data</h2>
 
@@ -274,21 +280,35 @@ const receptionIcon = L.divIcon({
     className: "emoji-marker",
     iconSize: [40, 40]
 });
-    
+
+const church = L.marker(
+    [45.4554, 8.8154],
+    { icon: churchIcon }
+).addTo(map);
+
+church.bindPopup(`
+    <h3>⛪ Cerimonia</h3>
+    <p>Santuario della Madonna dell'Acquanegra</p>
+`);
+
+const reception = L.marker(
+    [45.4121, 8.8563],
+    { icon: receptionIcon }
+).addTo(map);
+
+reception.bindPopup(`
+    <h3>🥂 Ricevimento</h3>
+    <p>Tenuta Cambiaga</p>
+`);
+
 const group = new L.featureGroup([
     church,
     reception
 ]);
 
 map.fitBounds(
-    group.getBounds().pad(0.25)
+    group.getBounds().pad(0.30)
 );
-
-L.polyline(
-[
-    [45.4554, 8.8154],
-    [45.4121, 8.8563]
-],
 {
     weight: 4
 }
