@@ -106,10 +106,30 @@ body{
     margin-top:10px;
 }
 
-    .gallery-section{
+  .hero{
     position:relative;
-    height:650px;
+    min-height:100vh;
     overflow:hidden;
+}
+
+.hero-slideshow{
+    position:absolute;
+    inset:0;
+}
+
+.hero-overlay{
+    position:relative;
+    z-index:10;
+    height:100vh;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+
+    background:rgba(255,255,255,0.45);
+    backdrop-filter:blur(2px);
 }
 
 .slide{
@@ -117,24 +137,9 @@ body{
     width:100%;
     height:100%;
     object-fit:cover;
+
     opacity:0;
     animation:fade 24s infinite;
-}
-
-.slide:nth-child(1){
-    animation-delay:0s;
-}
-
-.slide:nth-child(2){
-    animation-delay:6s;
-}
-
-.slide:nth-child(3){
-    animation-delay:12s;
-}
-
-.slide:nth-child(4){
-    animation-delay:18s;
 }
 
 @keyframes fade{
@@ -176,18 +181,19 @@ href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-mach
 <body>
 
 <section class="hero">
-    <h1>Sara & Claudio</h1>
-    <p>27 Maggio 2027</p>
 
-    <div class="countdown" id="countdown"></div>
-</section>
+    <div class="hero-slideshow">
+        <img src="foto1.jpg" class="slide">
+        <img src="foto2.jpg" class="slide">
+        <img src="foto3.jpg" class="slide">
+        <img src="foto4.jpg" class="slide">
+    </div>
 
-    <section class="gallery-section">
-
-    <img src="foto1.jpg" class="slide">
-    <img src="foto2.jpg" class="slide">
-    <img src="foto3.jpg" class="slide">
-    <img src="foto4.jpg" class="slide">
+    <div class="hero-overlay">
+        <h1>Sara & Claudio</h1>
+        <p>27 Maggio 2027</p>
+        <div class="countdown" id="countdown"></div>
+    </div>
 
 </section>
 <div class="container">
