@@ -448,6 +448,12 @@ L.Routing.control({
 
     <script>
 
+document.querySelectorAll(".card").forEach((card, index) => {
+
+    card.style.transitionDelay = `${index * 0.1}s`;
+
+});
+
 const observer = new IntersectionObserver((entries) => {
 
     entries.forEach(entry => {
