@@ -128,13 +128,29 @@ body{
 }
 
 .btn{
-    display:inline-block;
+    display:block;
+    width:100%;
+    max-width:400px;
+
+    text-align:center;
     text-decoration:none;
+
     background:#9d8461;
     color:white;
-    padding:12px 20px;
-    border-radius:12px;
-    margin-top:15px;
+
+    padding:18px;
+    border-radius:14px;
+
+    margin:15px auto;
+
+    font-weight:500;
+
+    transition:all .3s ease;
+}
+
+.btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 8px 20px rgba(0,0,0,.15);
 }
 
 .btn:hover{
