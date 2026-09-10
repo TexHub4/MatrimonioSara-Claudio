@@ -73,17 +73,10 @@ body{
 
 .countdown{
     margin-top:25px;
-
-    font-size:1.4rem;
-    font-weight:600;
-
-    padding:15px 25px;
-
-    background:rgba(255,255,255,0.55);
-
-    border-radius:15px;
-
-    backdrop-filter:blur(5px);
+    font-size:2rem;
+    font-weight:500;
+    color:#4a4a4a;
+    letter-spacing:1px;
 }
 
 .container{
@@ -316,13 +309,13 @@ href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-mach
     <a class="btn"
        target="_blank"
        href="https://maps.app.goo.gl/9hgN3UdKiWscznmg7">
-        ⛪ Apri la Chiesa
+        ⛪ Chiesa
     </a>
 
     <a class="btn"
        target="_blank"
        href="https://maps.app.goo.gl/h2ePBcRYj4hf1GyH7">
-        🥂 Apri il Ricevimento
+        🥂 Ricevimento
     </a>
 </div>
 
@@ -336,12 +329,12 @@ href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-mach
     <a class="btn"
        target="_blank"
        href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Matrimonio+Sara+e+Claudio&dates=20270527T130000Z/20270527T230000Z&details=Matrimonio+di+Sara+e+Claudio&location=Santuario+della+Madonna+dell%27Acqua+Nera">
-       📅 Google Calendar
+       📅 Android
     </a>
 
     <a class="btn"
        href="SaraClaudio2027.ics">
-       🍎 Apple Calendar
+       🍎 Apple
     </a>
 
     <a class="btn"
@@ -402,7 +395,7 @@ href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-mach
 
 <script>
 
-const weddingDate = new Date("2027-05-27T15:00:00");
+const weddingDate = new Date("2027-05-27T00:00:00");
 
 function updateCountdown(){
 
@@ -410,21 +403,27 @@ function updateCountdown(){
 
     const diff = weddingDate - now;
 
+    if(diff <= 0){
+        document.getElementById("countdown").innerHTML =
+            "Ci siamo! ❤️";
+        return;
+    }
+
     const days = Math.floor(diff / (1000 * 60 * 60 * 24));
 
     const hours = Math.floor(
-        (diff % (1000 * 60 * 60 * 24)) /
-        (1000 * 60 * 60)
+        (diff % (1000 * 60 * 60 * 24))
+        / (1000 * 60 * 60)
     );
 
     const minutes = Math.floor(
-        (diff % (1000 * 60 * 60)) /
-        (1000 * 60)
+        (diff % (1000 * 60 * 60))
+        / (1000 * 60)
     );
 
     const seconds = Math.floor(
-        (diff % (1000 * 60)) /
-        1000
+        (diff % (1000 * 60))
+        / 1000
     );
 
     document.getElementById("countdown").innerHTML =
@@ -432,7 +431,6 @@ function updateCountdown(){
 }
 
 updateCountdown();
-
 setInterval(updateCountdown, 1000);
 
 </script>
