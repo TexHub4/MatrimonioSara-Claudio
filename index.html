@@ -98,9 +98,19 @@ body{
 }
 
 .container{
-    max-width:900px;
+    position:relative;
+    z-index:10;
+
+    max-width:850px;
     margin:auto;
-    padding:40px 20px;
+
+    background:#faf8f5;
+
+    border-radius:40px 40px 0 0;
+
+    margin-top:-80px;
+
+    padding:60px 20px 40px;
 }
 
 .card{
@@ -184,6 +194,16 @@ body{
 
     background:rgba(255,255,255,0.35);
     backdrop-filter:blur(3px);
+}
+    
+.hero{
+    position:sticky;
+    top:0;
+
+    height:100vh;
+    overflow:hidden;
+
+    z-index:1;
 }
 
 .slide{
