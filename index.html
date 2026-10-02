@@ -216,6 +216,61 @@ body{
     z-index:1;
 }
 
+.modal{
+    display:none;
+    position:fixed;
+    z-index:9999;
+    inset:0;
+
+    background:rgba(0,0,0,.45);
+
+    justify-content:center;
+    align-items:center;
+}
+
+.modal-content{
+    background:#fcfaf7;
+    width:90%;
+    max-width:550px;
+
+    padding:35px;
+
+    border-radius:20px;
+
+    text-align:center;
+
+    position:relative;
+}
+
+.close-modal{
+    position:absolute;
+    right:20px;
+    top:15px;
+
+    font-size:30px;
+    cursor:pointer;
+}
+
+.iban-box{
+    margin:20px 0;
+
+    padding:15px;
+
+    background:#f4f0ea;
+
+    border-radius:10px;
+
+    font-weight:600;
+
+    word-break:break-all;
+}
+
+#copyMessage{
+    margin-top:10px;
+    color:#a88a63;
+    font-weight:500;
+}
+
 .slide{
     position:absolute;
     width:100%;
@@ -382,7 +437,7 @@ In questa pagina troverete tutte le informazioni utili per partecipare al nostro
     <h2>📍 Luoghi del matrimonio</h2>
 
     <p>
-        La cerimonia si terrà presso il Santuario della Madonna dell'Acquanegra,
+        La cerimonia si terrà presso il Santuario della Madonna dell'Acquanera,
         mentre il ricevimento avrà luogo presso Tenuta Cambiaga.
     </p>
 
@@ -419,7 +474,7 @@ In questa pagina troverete tutte le informazioni utili per partecipare al nostro
     <h2>📅 Salva la data</h2>
 
     <p>
-        Aggiungi il matrimonio di Sara & Claudio al tuo calendario per non dimenticare il grande giorno.
+        Aggiungi l'evento al tuo calendario per non dimenticare il grande giorno.
     </p>
 
     <a class="btn"
@@ -467,12 +522,17 @@ In questa pagina troverete tutte le informazioni utili per partecipare al nostro
 </div>
 
      <div class="card">
-        <h2>🎁 Lista nozze</h2>
+    <h2>🎁 Lista nozze</h2>
 
-        <div class="placeholder">
-            IBAN
-        </div>
-    </div>
+    <p>
+        Il regalo più bello sarà condividere con voi questo giorno speciale.
+        Per chi desiderasse contribuire al nostro futuro insieme, abbiamo preparato una lista nozze.
+    </p>
+
+    <a class="btn" onclick="openGiftModal()">
+        🎁 Visualizza lista nozze
+    </a>
+</div>
 
 </div>
 
@@ -606,5 +666,69 @@ document.querySelectorAll(".card").forEach(card => {
 });
 
 </script>
+
+<div id="giftModal" class="modal">
+
+    <div class="modal-content">
+
+        <span class="close-modal" onclick="closeGiftModal()">
+            &times;
+        </span>
+
+        <h2>🤍 Grazie</h2>
+
+        <p>
+            La vostra presenza sarà il regalo più importante.
+            Se desiderate contribuire al nostro futuro insieme,
+            potete farlo tramite il seguente IBAN.
+        </p>
+
+        <div class="iban-box" id="ibanText">
+            IT00X0000000000000000000000
+        </div>
+
+        <button class="btn" onclick="copyIBAN()">
+            📋 Copia IBAN
+        </button>
+
+        <p id="copyMessage"></p>
+
+    </div>
+
+</div>
+
+<script>
+
+function openGiftModal(){
+    document.getElementById("giftModal").style.display = "flex";
+}
+
+function closeGiftModal(){
+    document.getElementById("giftModal").style.display = "none";
+}
+
+function copyIBAN(){
+
+    const iban =
+        document.getElementById("ibanText").innerText;
+
+    navigator.clipboard.writeText(iban);
+
+    document.getElementById("copyMessage").innerText =
+        "✓ IBAN copiato negli appunti";
+}
+
+window.onclick = function(event){
+
+    const modal =
+        document.getElementById("giftModal");
+
+    if(event.target === modal){
+        closeGiftModal();
+    }
+}
+
+</script>
+    
 </body>
 </html>
