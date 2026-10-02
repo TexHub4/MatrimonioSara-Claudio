@@ -161,9 +161,7 @@ body {
 ========================= */
 
 .hero-overlay {
-
     position: relative;
-
     z-index: 10;
 
     height: 100vh;
@@ -178,15 +176,22 @@ body {
 
     padding: 20px;
 
+    /* Il velo rimane SEMPRE presente */
     background: rgba(255,255,255,0.35);
+
+    backdrop-filter: blur(3px);
+
+    will-change: transform;
+}
+
+.hero-overlay > * {
+    position: relative;
+    z-index: 2;
 
     opacity: 1;
 
-    transition: none;
-
     will-change: opacity, transform;
 }
-
 
 .hero h1 {
 
@@ -783,7 +788,6 @@ body {
 
 <section class="hero">
 
-```
 <div class="hero-slideshow">
 
     <img src="Fedi.jpg" class="slide" alt="">
@@ -798,16 +802,19 @@ body {
 
 <div class="hero-overlay">
 
-    <h1>Sara & Claudio</h1>
+    <div class="hero-content">
 
-    <div class="hero-divider"></div>
+        <h1>Sara & Claudio</h1>
 
-    <p class="hero-date">
-        27 Maggio 2027
-    </p>
+        <div class="hero-divider"></div>
 
-    <div class="countdown" id="countdown"></div>
+        <p class="hero-date">
+            27 Maggio 2027
+        </p>
 
+        <div class="countdown" id="countdown"></div>
+
+    </div>
 
     <div
         class="scroll-down"
@@ -820,7 +827,14 @@ body {
     </div>
 
 </div>
-```
+
+.hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    will-change: opacity, transform;
+}
 
 </section>
 
@@ -830,7 +844,6 @@ body {
 
 <div class="container">
 
-```
 <!-- BENVENUTI -->
 
 <div class="card">
@@ -1049,7 +1062,6 @@ body {
     </button>
 
 </div>
-```
 
 </div>
 
@@ -1059,9 +1071,7 @@ body {
 
 <div class="footer">
 
-```
 Sara & Claudio • 27 Maggio 2027
-```
 
 </div>
 
@@ -1071,7 +1081,6 @@ Sara & Claudio • 27 Maggio 2027
 
 <div id="giftModal" class="modal">
 
-```
 <div class="modal-content">
 
     <span
@@ -1115,7 +1124,6 @@ Sara & Claudio • 27 Maggio 2027
     <p id="copyMessage"></p>
 
 </div>
-```
 
 </div>
 
@@ -1466,21 +1474,47 @@ function copyIBAN() {
    CLOSE MODAL OUTSIDE
 ========================= */
 
-window.addEventListener(
-    "click",
-    function(event) {
+window.addEventListener("scroll", function() {
 
-        const modal =
-            document.getElementById("giftModal");
+    const heroContent =
+        document.querySelector(".hero-content");
+
+    const scrollDown =
+        document.querySelector(".scroll-down");
+
+    const scrollY =
+        window.scrollY;
+
+    const maxFade = 350;
+
+    const progress =
+        Math.min(scrollY / maxFade, 1);
 
 
-        if (event.target === modal) {
+    /* 
+       Scompaiono solamente:
+       - nomi
+       - linea
+       - data
+       - countdown
+    */
 
-            closeGiftModal();
+    heroContent.style.opacity =
+        1 - progress;
 
-        }
+    heroContent.style.transform =
+        `translateY(${-progress * 60}px)`;
 
-    }
+
+    /*
+       Anche la freccia scompare
+       progressivamente.
+    */
+
+    scrollDown.style.opacity =
+        1 - progress;
+
+});
 );
 
 
