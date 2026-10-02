@@ -205,15 +205,7 @@ body{
     background:rgba(255,255,255,0.35);
     backdrop-filter:blur(3px);
 
-    transition:
-        opacity .6s ease,
-        transform .6s ease;
-}
-
-.hero-overlay.fade-out{
-    opacity:0;
-    transform:translateY(-40px);
-    pointer-events:none;
+    transition:opacity .2s linear;
 }
     
 .hero{
@@ -790,15 +782,18 @@ window.addEventListener("scroll", () => {
     const heroOverlay =
         document.querySelector(".hero-overlay");
 
-    if(window.scrollY > 150){
+    const scrollY = window.scrollY;
 
-        heroOverlay.classList.add("fade-out");
+    const maxFade = 350;
 
-    }else{
+    const progress =
+        Math.min(scrollY / maxFade, 1);
 
-        heroOverlay.classList.remove("fade-out");
+    heroOverlay.style.opacity =
+        1 - progress;
 
-    }
+    heroOverlay.style.transform =
+        `translateY(${-progress * 60}px)`;
 
 });
 
