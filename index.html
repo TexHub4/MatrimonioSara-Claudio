@@ -204,6 +204,16 @@ body{
 
     background:rgba(255,255,255,0.35);
     backdrop-filter:blur(3px);
+
+    transition:
+        opacity .6s ease,
+        transform .6s ease;
+}
+
+.hero-overlay.fade-out{
+    opacity:0;
+    transform:translateY(-40px);
+    pointer-events:none;
 }
     
 .hero{
@@ -770,6 +780,27 @@ window.onclick = function(event){
         closeGiftModal();
     }
 }
+
+</script>
+
+<script>
+
+window.addEventListener("scroll", () => {
+
+    const heroOverlay =
+        document.querySelector(".hero-overlay");
+
+    if(window.scrollY > 150){
+
+        heroOverlay.classList.add("fade-out");
+
+    }else{
+
+        heroOverlay.classList.remove("fade-out");
+
+    }
+
+});
 
 </script>
     
