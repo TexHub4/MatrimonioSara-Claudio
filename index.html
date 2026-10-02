@@ -212,15 +212,33 @@ body{
 
     background:rgba(255,255,255,0.35);
     backdrop-filter:blur(3px);
+}
+
+.hero-content{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+
+    opacity:1;
+    transform:translateY(0);
 
     transition:
         opacity .6s ease,
         transform .6s ease;
 }
 
-.hero-overlay.fade-out{
+.hero-content.fade-out{
     opacity:0;
     transform:translateY(-40px);
+    pointer-events:none;
+}
+
+.scroll-down{
+    transition:opacity .6s ease;
+}
+
+.scroll-down.fade-out{
+    opacity:0;
     pointer-events:none;
 }
     
@@ -448,18 +466,26 @@ href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-mach
 </div>
 
     <div class="hero-overlay">
-    <h1>Sara & Claudio</h1>
-        <div class="hero-divider"></div>
-    <p class="hero-date">27 Maggio 2027</p>
 
-    <div class="countdown" id="countdown"></div>
+    <div class="hero-content">
+
+        <h1>Sara & Claudio</h1>
+
+        <div class="hero-divider"></div>
+
+        <p class="hero-date">27 Maggio 2027</p>
+
+        <div class="countdown" id="countdown"></div>
+
+    </div>
 
     <div class="scroll-down" onclick="window.scrollTo({
-    top: window.innerHeight,
-    behavior: 'smooth'
-})">
-    ⌄
-</div>
+        top: window.innerHeight,
+        behavior: 'smooth'
+    })">
+        ⌄
+    </div>
+
 </div>
 
 </section>
@@ -797,16 +823,21 @@ window.onclick = function(event){
 
 window.addEventListener("scroll", () => {
 
-    const heroOverlay =
-        document.querySelector(".hero-overlay");
+    const heroContent =
+        document.querySelector(".hero-content");
+
+    const scrollDown =
+        document.querySelector(".scroll-down");
 
     if(window.scrollY > 150){
 
-        heroOverlay.classList.add("fade-out");
+        heroContent.classList.add("fade-out");
+        scrollDown.classList.add("fade-out");
 
     }else{
 
-        heroOverlay.classList.remove("fade-out");
+        heroContent.classList.remove("fade-out");
+        scrollDown.classList.remove("fade-out");
 
     }
 
