@@ -1,367 +1,338 @@
 <!DOCTYPE html>
+
 <html lang="it">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Sara & Claudio - 27 Maggio 2027</title>
 
+<!-- Google Fonts -->
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap" rel="stylesheet">   
-    
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Parisienne&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+
+<!-- Leaflet -->
+
+<link rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+<!-- Leaflet Routing Machine -->
+
+<link rel="stylesheet"
+      href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css">
+
 <style>
 
-.emoji-marker {
-    background: transparent !important;
-    border: none !important;
-    font-size: 40px;
+/* =========================
+   RESET
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* =========================
+   BODY
+========================= */
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: #faf8f5;
+    color: #333;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+    position: sticky;
+    top: 0;
+
+    height: 100vh;
+
+    overflow: hidden;
+
+    z-index: 1;
+}
+
+
+/* =========================
+   SLIDESHOW
+========================= */
+
+.hero-slideshow {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+}
+
+
+.slide {
+    position: absolute;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    opacity: 0;
+
+    animation: fade 36s infinite;
+}
+
+
+/*
+   6 immagini
+   Ogni immagine rimane visibile
+   per circa 6 secondi.
+*/
+
+.slide:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.slide:nth-child(2) {
+    animation-delay: 6s;
+}
+
+.slide:nth-child(3) {
+    animation-delay: 12s;
+}
+
+.slide:nth-child(4) {
+    animation-delay: 18s;
+}
+
+.slide:nth-child(5) {
+    animation-delay: 24s;
+}
+
+.slide:nth-child(6) {
+    animation-delay: 30s;
+}
+
+
+@keyframes fade {
+
+    0% {
+        opacity: 0;
+    }
+
+    5% {
+        opacity: 1;
+    }
+
+    16% {
+        opacity: 1;
+    }
+
+    22% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 0;
+    }
+
+}
+
+
+/* =========================
+   HERO OVERLAY
+========================= */
+
+.hero-overlay {
+
+    position: relative;
+
+    z-index: 10;
+
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
     text-align: center;
-    line-height: 40px;
+
+    padding: 20px;
+
+    background: rgba(255,255,255,0.35);
+
+    backdrop-filter: blur(3px);
+
+    /*
+       L'opacity viene modificata
+       dinamicamente durante lo scroll.
+    */
+
+    opacity: 1;
+
+    transition: none;
+
+    will-change: opacity, transform;
 }
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
 
-body{
-    font-family:'Montserrat',sans-serif;
-    background:#faf8f5;
-    color:#333;
-}
+.hero h1 {
 
-.hero{
-    position:relative;
-    height:100vh;
-    overflow:hidden;
-}
+    font-family: 'Parisienne', cursive;
 
-.hero-slideshow{
-    position:absolute;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-}
+    font-size: 6.5rem;
 
-<script>
-const slides = document.querySelectorAll('.slide');
+    font-weight: 400;
 
-slides.forEach((slide, index) => {
-    slide.style.animationDelay = `${index * 6}s`;
-});
-
-const totalDuration = slides.length * 6;
-
-slides.forEach(slide => {
-    slide.style.animationDuration = `${totalDuration}s`;
-});
-</script>
-    
-
-.hero p{
-    font-size:1.2rem;
-}
-
-.hero h1{
-    font-family:'Parisienne', cursive;
-    font-size:6.5rem;
-    font-weight:400;
-    color:#2f2f2f;
+    color: #2f2f2f;
 
     text-shadow:
         0 2px 10px rgba(255,255,255,.7),
         0 0 25px rgba(255,255,255,.4);
 }
-    .hero-divider{
-    width:120px;
-    height:2px;
-    background:#9d8461;
-    margin:20px 0;
-}
-    .hero-date{
-    font-size:1rem;
-    letter-spacing:4px;
-    text-transform:uppercase;
-    color:#555;
-}
 
-.countdown{
-    margin-top:25px;
-    font-size:1.05rem;
-    font-weight:400;
-    color:#555;
-    letter-spacing:1.5px;
-    text-transform:uppercase;
+
+.hero-divider {
+
+    width: 120px;
+
+    height: 2px;
+
+    background: #9d8461;
+
+    margin: 20px 0;
 }
 
-.container{
-    position:relative;
-    z-index:20;
 
-    max-width:850px;
-    margin:auto;
+.hero-date {
 
-    margin-top:120px;
+    font-size: 1rem;
 
-    padding:0 20px 40px;
+    letter-spacing: 4px;
+
+    text-transform: uppercase;
+
+    color: #555;
 }
 
-.card{
-    background:white;
-    border-radius:20px;
-    padding:30px;
-    margin-bottom:25px;
-    box-shadow:0 4px 12px rgba(0,0,0,.08);
+
+.countdown {
+
+    margin-top: 25px;
+
+    font-size: 1.05rem;
+
+    font-weight: 400;
+
+    color: #555;
+
+    letter-spacing: 1.5px;
+
+    text-transform: uppercase;
 }
 
-.welcome-date{
-    display:block;
-    text-align:center;
 
-    font-size:1.15rem;
-    font-weight:500;
+/* =========================
+   SCROLL DOWN
+========================= */
 
-    letter-spacing:2px;
-    color:#a88a63;
+.scroll-down {
+
+    cursor: pointer;
+
+    position: absolute;
+
+    bottom: 30px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    font-size: 2rem;
+
+    color: #555;
+
+    animation: bounce 2s infinite;
+
+    z-index: 200;
 }
 
-.card h2{
-    margin-bottom:15px;
-    font-family:'Playfair Display',serif;
-}
-.card h2::after{
-    content:"";
-    display:block;
 
-    width:60px;
-    height:2px;
+@keyframes bounce {
 
-    background:#a88a63;
-
-    margin:12px auto 0;
-}
-
-.btn{
-    display:block;
-    width:80%;
-    max-width:400px;
-    margin:15px auto 0;
-
-    text-align:center;
-    text-decoration:none;
-
-    background:#a88a63;
-    color:white;
-
-    padding:16px;
-    border-radius:12px;
-
-    font-weight:500;
-    letter-spacing:0.5px;
-
-    transition:all .3s ease;
-}
-.btn:hover{
-    transform:translateY(-3px);
-    box-shadow:0 10px 25px rgba(0,0,0,.18);
-}
-
-.footer{
-    text-align:center;
-    padding:40px;
-    color:#777;
-}
-
-.placeholder{
-    background:#f5f5f5;
-    padding:15px;
-    border-radius:10px;
-    margin-top:10px;
-    text-align:center;
-}
-
-.hero-slideshow{
-    position:absolute;
-    inset:0;
-}
-
-.hero-overlay{
-    position:relative;
-    z-index:10;
-    height:100vh;
-
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-
-    background:rgba(255,255,255,0.35);
-    backdrop-filter:blur(3px);
-
-    transition:opacity .2s linear;
-}
-    
-.hero{
-    position:sticky;
-    top:0;
-
-    height:100vh;
-    overflow:hidden;
-
-    z-index:1;
-}
-
-.modal{
-    display:none;
-    position:fixed;
-    z-index:9999;
-    inset:0;
-
-    background:rgba(0,0,0,.45);
-
-    justify-content:center;
-    align-items:center;
-
-    opacity:0;
-    transition:opacity .35s ease;
-}
-
-.modal.show{
-    opacity:1;
-}
-
-.modal-content{
-    position:relative;
-
-    background:rgba(255,255,255,0.95);
-    backdrop-filter:blur(20px);
-
-    width:90%;
-    max-width:550px;
-
-    padding:40px;
-
-    border-radius:24px;
-
-    text-align:center;
-
-    border:1px solid rgba(255,255,255,0.5);
-
-    box-shadow:
-        0 25px 60px rgba(0,0,0,.15),
-        0 5px 20px rgba(168,138,99,.15);
-
-    transform:translateY(30px) scale(.92);
-    opacity:0;
-
-    transition:
-        transform .45s cubic-bezier(.22,1,.36,1),
-        opacity .45s ease;
-}
-
-.modal.show .modal-content{
-    transform:translateY(0) scale(1);
-    opacity:1;
-}
-
-.close-modal{
-    position:absolute;
-    right:20px;
-    top:15px;
-
-    font-size:30px;
-    cursor:pointer;
-}
-
-.iban-box{
-    margin:20px 0;
-
-    padding:15px;
-
-    background:#f4f0ea;
-
-    border-radius:10px;
-
-    font-weight:600;
-
-    word-break:break-all;
-}
-
-#copyMessage{
-    margin-top:10px;
-    color:#a88a63;
-    font-weight:500;
-}
-
-.slide{
-    position:absolute;
-    width:100%;
-    height:100%;
-    object-fit:cover;
-
-    opacity:0;
-    animation:fade 24s infinite;
-}
-
-@keyframes fade{
-    0%{
-        opacity:0;
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateX(-50%) translateY(0);
     }
-    8%{
-        opacity:1;
-    }
-    25%{
-        opacity:1;
-    }
-    33%{
-        opacity:0;
-    }
-    100%{
-        opacity:0;
-    }
-}
-</style>
-    <link rel="stylesheet"
-href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 
-<style>
-#map{
-    height:450px;
-    width:85%;
-    border-radius:15px;
-    box-shadow:0 8px 20px rgba(0,0,0,.10);
-    margin:20px auto;
-}
-    .leaflet-container {
-    border-radius: 15px;
-}
-    .leaflet-routing-container{
-    display:none !important;
-}
-.card{
-    background:rgba(255,255,255,0.90);
-    backdrop-filter:blur(20px);
+    40% {
+        transform: translateX(-50%) translateY(-10px);
+    }
 
-    border:1px solid rgba(255,255,255,0.35);
+    60% {
+        transform: translateX(-50%) translateY(-5px);
+    }
 
-    border-radius:20px;
+}
 
-    padding:25px 35px;
-    margin-bottom:25px;
+
+/* =========================
+   CONTAINER
+========================= */
+
+.container {
+
+    position: relative;
+
+    z-index: 20;
+
+    max-width: 850px;
+
+    margin: auto;
+
+    padding: 120px 20px 40px;
+}
+
+
+/* =========================
+   CARD
+========================= */
+
+.card {
+
+    background: rgba(255,255,255,0.90);
+
+    backdrop-filter: blur(20px);
+
+    border: 1px solid rgba(255,255,255,0.35);
+
+    border-radius: 20px;
+
+    padding: 30px;
+
+    margin-bottom: 25px;
 
     box-shadow:
         0 8px 25px rgba(0,0,0,.05),
         0 2px 8px rgba(168,138,99,.08);
 
-    text-align:center;
+    text-align: center;
 
-    opacity:0;
-    transform:translateY(60px);
+    opacity: 0;
+
+    transform: translateY(60px);
 
     transition:
         opacity 1s ease,
@@ -369,242 +340,789 @@ href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
         box-shadow .3s ease;
 }
 
-.card.show{
-    opacity:1;
-    transform:translateY(0);
+
+.card.show {
+
+    opacity: 1;
+
+    transform: translateY(0);
 }
-    .card:hover{
-    transform:translateY(-4px);
+
+
+/*
+   Importante:
+   non utilizziamo transform nel normale
+   :hover perché interferirebbe con
+   l'animazione di comparsa.
+*/
+
+.card:hover {
+
     box-shadow:
         0 15px 35px rgba(0,0,0,.08);
 }
-    .card p{
-    max-width:700px;
-    margin:0 auto;
-    line-height:1.7;
-}
-    .scroll-down{
-    cursor:pointer;
-    position:absolute;
-    bottom:30px;
-    left:50%;
-    transform:translateX(-50%);
-    
-    font-size:2rem;
-    color:#555;
 
-    animation:bounce 2s infinite;
 
-    z-index:200;
+.card h2 {
+
+    margin-bottom: 15px;
+
+    font-family: 'Playfair Display', serif;
 }
 
-@keyframes bounce{
 
-    0%,20%,50%,80%,100%{
-        transform:translateX(-50%) translateY(0);
-    }
+.card h2::after {
 
-    40%{
-        transform:translateX(-50%) translateY(-10px);
-    }
+    content: "";
 
-    60%{
-        transform:translateX(-50%) translateY(-5px);
-    }
+    display: block;
+
+    width: 60px;
+
+    height: 2px;
+
+    background: #a88a63;
+
+    margin: 12px auto 0;
 }
+
+
+.card p {
+
+    max-width: 700px;
+
+    margin: 0 auto;
+
+    line-height: 1.7;
+}
+
+
+/* =========================
+   WELCOME DATE
+========================= */
+
+.welcome-date {
+
+    display: block;
+
+    text-align: center;
+
+    font-size: 1.15rem;
+
+    font-weight: 500;
+
+    letter-spacing: 2px;
+
+    color: #a88a63;
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+.btn {
+
+    display: block;
+
+    width: 80%;
+
+    max-width: 400px;
+
+    margin: 15px auto 0;
+
+    text-align: center;
+
+    text-decoration: none;
+
+    background: #a88a63;
+
+    color: white;
+
+    padding: 16px;
+
+    border-radius: 12px;
+
+    font-weight: 500;
+
+    letter-spacing: 0.5px;
+
+    border: none;
+
+    cursor: pointer;
+
+    font-family: 'Montserrat', sans-serif;
+
+    transition:
+        transform .3s ease,
+        box-shadow .3s ease;
+}
+
+
+.btn:hover {
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.18);
+}
+
+
+/* =========================
+   MAP
+========================= */
+
+#map {
+
+    height: 450px;
+
+    width: 85%;
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 8px 20px rgba(0,0,0,.10);
+
+    margin: 20px auto;
+}
+
+
+.leaflet-container {
+
+    border-radius: 15px;
+}
+
+
+.leaflet-routing-container {
+
+    display: none !important;
+}
+
+
+/* =========================
+   EMOJI MAP MARKERS
+========================= */
+
+.emoji-marker {
+
+    background: transparent !important;
+
+    border: none !important;
+
+    font-size: 40px;
+
+    text-align: center;
+
+    line-height: 40px;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer {
+
+    position: relative;
+
+    z-index: 20;
+
+    text-align: center;
+
+    padding: 40px;
+
+    color: #777;
+}
+
+
+/* =========================
+   PLACEHOLDER
+========================= */
+
+.placeholder {
+
+    background: #f5f5f5;
+
+    padding: 15px;
+
+    border-radius: 10px;
+
+    margin-top: 10px;
+
+    text-align: center;
+}
+
+
+/* =========================
+   MODAL
+========================= */
+
+.modal {
+
+    display: none;
+
+    position: fixed;
+
+    z-index: 9999;
+
+    inset: 0;
+
+    background: rgba(0,0,0,.45);
+
+    justify-content: center;
+
+    align-items: center;
+
+    opacity: 0;
+
+    transition: opacity .35s ease;
+}
+
+
+.modal.show {
+
+    opacity: 1;
+}
+
+
+.modal-content {
+
+    position: relative;
+
+    background: rgba(255,255,255,0.95);
+
+    backdrop-filter: blur(20px);
+
+    width: 90%;
+
+    max-width: 550px;
+
+    padding: 40px;
+
+    border-radius: 24px;
+
+    text-align: center;
+
+    border: 1px solid rgba(255,255,255,0.5);
+
+    box-shadow:
+        0 25px 60px rgba(0,0,0,.15),
+        0 5px 20px rgba(168,138,99,.15);
+
+    transform: translateY(30px) scale(.92);
+
+    opacity: 0;
+
+    transition:
+        transform .45s cubic-bezier(.22,1,.36,1),
+        opacity .45s ease;
+}
+
+
+.modal.show .modal-content {
+
+    transform: translateY(0) scale(1);
+
+    opacity: 1;
+}
+
+
+.close-modal {
+
+    position: absolute;
+
+    right: 20px;
+
+    top: 15px;
+
+    font-size: 30px;
+
+    cursor: pointer;
+}
+
+
+/* =========================
+   IBAN
+========================= */
+
+.iban-box {
+
+    margin: 20px 0;
+
+    padding: 15px;
+
+    background: #f4f0ea;
+
+    border-radius: 10px;
+
+    font-weight: 600;
+
+    word-break: break-all;
+}
+
+
+#copyMessage {
+
+    margin-top: 10px;
+
+    color: #a88a63;
+
+    font-weight: 500;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 768px) {
+
+    .hero h1 {
+
+        font-size: 4.5rem;
+    }
+
+    .hero-date {
+
+        font-size: .9rem;
+
+        letter-spacing: 3px;
+    }
+
+    .countdown {
+
+        font-size: .9rem;
+
+        letter-spacing: 1px;
+    }
+
+    .container {
+
+        padding-left: 15px;
+
+        padding-right: 15px;
+    }
+
+    .card {
+
+        padding: 25px 20px;
+    }
+
+    #map {
+
+        width: 100%;
+
+        height: 400px;
+    }
+
+    .btn {
+
+        width: 100%;
+    }
+
+}
+
+
+@media (max-width: 480px) {
+
+    .hero h1 {
+
+        font-size: 3.8rem;
+    }
+
+    .hero-date {
+
+        font-size: .8rem;
+
+        letter-spacing: 2px;
+    }
+
+    .countdown {
+
+        font-size: .8rem;
+    }
+
+}
+
+
+/* =========================
+   REDUCE MOTION
+========================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .slide {
+
+        animation: none;
+    }
+
+    .scroll-down {
+
+        animation: none;
+    }
+
+    .card {
+
+        opacity: 1;
+
+        transform: none;
+
+        transition: none;
+    }
+
+}
+
 </style>
-    <link rel="stylesheet"
-href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css">
+
 </head>
+
 <body>
+
+<!-- =========================
+     HERO
+========================= -->
 
 <section class="hero">
 
-    <div class="hero-slideshow">
-        <img src="Fedi.jpg" class="slide">
-        <img src="Bouquet.jpg" class="slide">
-        <img src="Chiesa.jpg" class="slide">
-        <img src="Cambiaga.jpg" class="slide">
-        <img src="Calici.jpg" class="slide">
-        <img src="Tavoli.jpg" class="slide">
-    </div>
+```
+<div class="hero-slideshow">
 
-    <div class="hero-overlay">
+    <img src="Fedi.jpg" class="slide" alt="">
+    <img src="Bouquet.jpg" class="slide" alt="">
+    <img src="Chiesa.jpg" class="slide" alt="">
+    <img src="Cambiaga.jpg" class="slide" alt="">
+    <img src="Calici.jpg" class="slide" alt="">
+    <img src="Tavoli.jpg" class="slide" alt="">
+
+</div>
+
+
+<div class="hero-overlay">
+
     <h1>Sara & Claudio</h1>
-        <div class="hero-divider"></div>
-    <p class="hero-date">27 Maggio 2027</p>
+
+    <div class="hero-divider"></div>
+
+    <p class="hero-date">
+        27 Maggio 2027
+    </p>
 
     <div class="countdown" id="countdown"></div>
 
-    <div class="scroll-down" onclick="window.scrollTo({
-    top: window.innerHeight,
-    behavior: 'smooth'
-})">
-    ⌄
-</div>
-</div>
 
-</section>
-<div class="container">
-
-    <div class="card">
-        <h2>Benvenuti</h2>
-        <p>
-            Siamo felici di condividere con voi il nostro giorno speciale
-
-<br><br>
-
-<span class="welcome-date">
-    Giovedì 27 Maggio 2027 🤍
-</span>
-
-<br><br>
-In questa pagina troverete tutte le informazioni utili per partecipare al nostro matrimonio e accompagnarci in questo giorno così importante
+    <div
+        class="scroll-down"
+        onclick="window.scrollTo({
+            top: window.innerHeight,
+            behavior: 'smooth'
+        })"
+    >
+        ⌄
     </div>
 
-   <div class="card">
+</div>
+```
+
+</section>
+
+<!-- =========================
+     CONTENT
+========================= -->
+
+<div class="container">
+
+```
+<!-- BENVENUTI -->
+
+<div class="card">
+
+    <h2>Benvenuti</h2>
+
+    <p>
+
+        Siamo felici di condividere con voi
+        il nostro giorno speciale.
+
+        <br><br>
+
+        <span class="welcome-date">
+            Giovedì 27 Maggio 2027 🤍
+        </span>
+
+        <br>
+
+        In questa pagina troverete tutte le informazioni
+        utili per partecipare al nostro matrimonio
+        e accompagnarci in questo giorno così importante.
+
+    </p>
+
+</div>
+
+
+
+<!-- LUOGHI -->
+
+<div class="card">
+
     <h2>📍 Luoghi del matrimonio</h2>
 
     <p>
-        La cerimonia si terrà presso il Santuario della Madonna dell'Acquanera,
-        mentre il ricevimento avrà luogo presso Tenuta Cambiaga.
+
+        La cerimonia si terrà presso il
+        Santuario della Madonna dell'Acquanera,
+        mentre il ricevimento avrà luogo presso
+        Tenuta Cambiaga.
+
     </p>
+
 
     <div id="map"></div>
 
-    <a class="btn"
-       target="_blank"
-       href="https://maps.app.goo.gl/9hgN3UdKiWscznmg7">
+
+    <a
+        class="btn"
+        target="_blank"
+        rel="noopener"
+        href="https://maps.app.goo.gl/9hgN3UdKiWscznmg7"
+    >
         ⛪ Chiesa
     </a>
 
-    <a class="btn"
-       target="_blank"
-       href="https://maps.app.goo.gl/h2ePBcRYj4hf1GyH7">
+
+    <a
+        class="btn"
+        target="_blank"
+        rel="noopener"
+        href="https://maps.app.goo.gl/h2ePBcRYj4hf1GyH7"
+    >
         🥂 Ricevimento
     </a>
+
 </div>
-    
- <div class="card">
+
+
+
+<!-- CONFERMA PRESENZA -->
+
+<div class="card">
+
     <h2>✅ Conferma presenza</h2>
 
     <p>
-        Ti chiediamo gentilmente di confermare la tua presenza compilando il modulo.
+
+        Ti chiediamo gentilmente di confermare
+        la tua presenza compilando il modulo.
+
     </p>
 
-    <a class="btn"
-       target="_blank"
-       href="https://forms.gle/yBvGUQJyAFpxUCSR8">
+
+    <a
+        class="btn"
+        target="_blank"
+        rel="noopener"
+        href="https://forms.gle/yBvGUQJyAFpxUCSR8"
+    >
         Conferma la tua presenza
     </a>
+
 </div>
 
-   <div class="card">
+
+
+<!-- SALVA LA DATA -->
+
+<div class="card">
+
     <h2>📅 Salva la data</h2>
 
     <p>
-        Aggiungi l'evento al tuo calendario per non dimenticare il grande giorno.
+
+        Aggiungi l'evento al tuo calendario
+        per non dimenticare il grande giorno.
+
     </p>
 
-    <a class="btn"
-       target="_blank"
-       href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Matrimonio+Sara+e+Claudio&dates=20270527T130000Z/20270527T230000Z&details=Matrimonio+di+Sara+e+Claudio&location=Santuario+della+Madonna+dell%27Acqua+Nera">
-       📅 Android
+
+    <a
+        class="btn"
+        target="_blank"
+        rel="noopener"
+        href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Matrimonio+Sara+e+Claudio&dates=20270527T130000Z/20270527T230000Z&details=Matrimonio+di+Sara+e+Claudio&location=Santuario+della+Madonna+dell%27Acqua+Nera"
+    >
+        📅 Google Calendar
     </a>
 
-    <a class="btn"
-       href="SaraClaudio2027.ics">
-       🍎 Apple
+
+    <a
+        class="btn"
+        href="SaraClaudio2027.ics"
+    >
+        🍎 Apple
     </a>
 
-    <a class="btn"
-       href="SaraClaudio2027.ics">
-       📧 Outlook
+
+    <a
+        class="btn"
+        href="SaraClaudio2027.ics"
+    >
+        📧 Outlook
     </a>
+
 </div>
 
-    <div class="card">
+
+
+<!-- FOTO -->
+
+<div class="card">
+
     <h2>📸 Foto degli invitati</h2>
 
     <p>
-        Condividi con noi i tuoi scatti
+
+        Condividi con noi i tuoi scatti.
+
     </p>
 
-    <a class="btn"
-       target="_blank"
-       href="https://photos.app.goo.gl/U14vkVy3bAd2mgn57">
+
+    <a
+        class="btn"
+        target="_blank"
+        rel="noopener"
+        href="https://photos.app.goo.gl/U14vkVy3bAd2mgn57"
+    >
         📷 Apri album fotografico
     </a>
+
 </div>
 
-    <div class="card">
+
+
+<!-- CONTATTI -->
+
+<div class="card">
+
     <h2>📞 Contatti utili</h2>
 
     <p>
-        Per qualsiasi necessità durante la giornata puoi contattare:
+
+        Per qualsiasi necessità durante la giornata
+        puoi contattare:
+
     </p>
 
-    <a class="btn" href="tel:+393397068674">
+
+    <a
+        class="btn"
+        href="tel:+393397068674"
+    >
         👩‍💼 Valeria (Testimone della sposa)
     </a>
 
 </div>
 
-     <div class="card">
+
+
+<!-- LISTA NOZZE -->
+
+<div class="card">
+
     <h2>🎁 Lista nozze</h2>
 
     <p>
-        Il regalo più bello sarà condividere con voi questo giorno speciale.
-        Per chi desiderasse contribuire al nostro futuro insieme, abbiamo preparato una lista nozze.
+
+        Il regalo più bello sarà condividere con voi
+        questo giorno speciale.
+
+        Per chi desiderasse contribuire al nostro
+        futuro insieme, abbiamo preparato una lista nozze.
+
     </p>
 
-    <a class="btn" onclick="openGiftModal()">
+
+    <button
+        class="btn"
+        type="button"
+        onclick="openGiftModal()"
+    >
         🎁 Visualizza lista nozze
-    </a>
-</div>
+    </button>
 
 </div>
+```
+
+</div>
+
+<!-- =========================
+     FOOTER
+========================= -->
 
 <div class="footer">
-    Sara & Claudio • 27 Maggio 2027
+
+```
+Sara & Claudio • 27 Maggio 2027
+```
+
 </div>
 
-<script>
+<!-- =========================
+     GIFT MODAL
+========================= -->
 
-const weddingDate = new Date("2027-05-27T00:00:00");
+<div id="giftModal" class="modal">
 
-function updateCountdown(){
+```
+<div class="modal-content">
 
-    const now = new Date();
+    <span
+        class="close-modal"
+        onclick="closeGiftModal()"
+    >
+        &times;
+    </span>
 
-    const diff = weddingDate - now;
 
-    if(diff <= 0){
-        document.getElementById("countdown").innerHTML =
-            "Ci siamo! 🤍✨";
-        return;
-    }
+    <h2>🤍 Grazie</h2>
 
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
 
-    const hours = Math.floor(
-        (diff % (1000 * 60 * 60 * 24))
-        / (1000 * 60 * 60)
-    );
+    <p>
 
-    const minutes = Math.floor(
-        (diff % (1000 * 60 * 60))
-        / (1000 * 60)
-    );
+        La vostra presenza sarà il regalo più importante.
 
-    document.getElementById("countdown").innerHTML =
-    `${days} giorni • ${hours} ore • ${minutes} minuti`;
-}
+        Se desiderate contribuire al nostro futuro insieme,
+        potete farlo tramite il seguente IBAN.
 
-updateCountdown();
-setInterval(updateCountdown, 1000);
+    </p>
 
-</script>
+
+    <div
+        class="iban-box"
+        id="ibanText"
+    >
+        IT00X0000000000000000000000
+    </div>
+
+
+    <button
+        class="btn"
+        type="button"
+        onclick="copyIBAN()"
+    >
+        📋 Copia IBAN
+    </button>
+
+
+    <p id="copyMessage"></p>
+
+</div>
+```
+
+</div>
+
+<!-- =========================
+     LEAFLET
+========================= -->
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
@@ -612,192 +1130,415 @@ setInterval(updateCountdown, 1000);
 
 <script>
 
-const map = L.map('map');
+/* =========================
+   COUNTDOWN
+========================= */
+
+const weddingDate =
+    new Date("2027-05-27T15:00:00");
+
+
+function updateCountdown() {
+
+    const now = new Date();
+
+    const diff =
+        weddingDate - now;
+
+
+    if (diff <= 0) {
+
+        document.getElementById("countdown").innerHTML =
+            "Ci siamo! 🤍✨";
+
+        return;
+    }
+
+
+    const days =
+        Math.floor(
+            diff /
+            (1000 * 60 * 60 * 24)
+        );
+
+
+    const hours =
+        Math.floor(
+            (diff %
+                (1000 * 60 * 60 * 24)
+            ) /
+            (1000 * 60 * 60)
+        );
+
+
+    const minutes =
+        Math.floor(
+            (diff %
+                (1000 * 60 * 60)
+            ) /
+            (1000 * 60)
+        );
+
+
+    document.getElementById("countdown").innerHTML =
+
+        `${days} giorni • ${hours} ore • ${minutes} minuti`;
+
+}
+
+
+updateCountdown();
+
+setInterval(updateCountdown, 1000);
+
+
+
+/* =========================
+   MAP
+========================= */
+
+const map =
+    L.map('map');
+
 
 L.tileLayer(
+
     'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+
     {
-        attribution: '&copy; OpenStreetMap contributors'
+        attribution:
+            '&copy; OpenStreetMap contributors'
     }
+
 ).addTo(map);
 
-const churchIcon = L.divIcon({
-    html: "⛪",
-    className: "emoji-marker",
-    iconSize: [40,40],
-    iconAnchor: [20,20]
-});
 
-const receptionIcon = L.divIcon({
-    html: "🥂",
-    className: "emoji-marker",
-    iconSize: [40,40],
-    iconAnchor: [20,20]
-});
 
-const church = L.marker(
-    [45.4554, 8.8154],
-    { icon: churchIcon }
-).addTo(map);
+/* ICONS */
 
-const reception = L.marker(
-    [45.4121, 8.8563],
-    { icon: receptionIcon }
-).addTo(map);
+const churchIcon =
+    L.divIcon({
 
-const group = L.featureGroup([
-    church,
-    reception
-]);
+        html: "⛪",
 
-map.fitBounds(
-    group.getBounds().pad(0.3)
-);
+        className:
+            "emoji-marker",
 
-L.Routing.control({
-    waypoints: [
-        L.latLng(45.4554, 8.8154),
-        L.latLng(45.4121, 8.8563)
-    ],
-    routeWhileDragging: false,
-    addWaypoints: false,
-    draggableWaypoints: false,
-    fitSelectedRoutes: true,
-    show: false
-}).addTo(map);
+        iconSize:
+            [40, 40],
 
-</script>
-
-    <script>
-
-document.querySelectorAll(".card").forEach((card, index) => {
-
-    card.style.transitionDelay = `${index * 0.1}s`;
-
-});
-
-const observer = new IntersectionObserver((entries) => {
-
-    entries.forEach(entry => {
-
-        if(entry.isIntersecting){
-            entry.target.classList.add("show");
-        }
+        iconAnchor:
+            [20, 20]
 
     });
 
-},{
-    threshold:0.15
-});
 
-document.querySelectorAll(".card").forEach(card => {
-    observer.observe(card);
-});
+const receptionIcon =
+    L.divIcon({
 
-</script>
+        html: "🥂",
 
-<div id="giftModal" class="modal">
+        className:
+            "emoji-marker",
 
-    <div class="modal-content">
+        iconSize:
+            [40, 40],
 
-        <span class="close-modal" onclick="closeGiftModal()">
-            &times;
-        </span>
+        iconAnchor:
+            [20, 20]
 
-        <h2>🤍 Grazie</h2>
+    });
 
-        <p>
-            La vostra presenza sarà il regalo più importante.
-            Se desiderate contribuire al nostro futuro insieme,
-            potete farlo tramite il seguente IBAN.
-        </p>
 
-        <div class="iban-box" id="ibanText">
-            IT00X0000000000000000000000
-        </div>
 
-        <button class="btn" onclick="copyIBAN()">
-            📋 Copia IBAN
-        </button>
+/* COORDINATES */
 
-        <p id="copyMessage"></p>
+const churchCoordinates =
+    [45.4554, 8.8154];
 
-    </div>
+const receptionCoordinates =
+    [45.4121, 8.8563];
 
-</div>
 
-<script>
 
-function openGiftModal(){
+/* MARKERS */
+
+const church =
+    L.marker(
+
+        churchCoordinates,
+
+        {
+            icon: churchIcon
+        }
+
+    ).addTo(map);
+
+
+const reception =
+    L.marker(
+
+        receptionCoordinates,
+
+        {
+            icon: receptionIcon
+        }
+
+    ).addTo(map);
+
+
+
+/* MAP VIEW */
+
+const group =
+    L.featureGroup([
+        church,
+        reception
+    ]);
+
+
+map.fitBounds(
+    group
+        .getBounds()
+        .pad(0.3)
+);
+
+
+
+/* =========================
+   DRIVING ROUTE
+========================= */
+
+L.Routing.control({
+
+    waypoints: [
+
+        L.latLng(
+            churchCoordinates[0],
+            churchCoordinates[1]
+        ),
+
+        L.latLng(
+            receptionCoordinates[0],
+            receptionCoordinates[1]
+        )
+
+    ],
+
+    routeWhileDragging: false,
+
+    addWaypoints: false,
+
+    draggableWaypoints: false,
+
+    fitSelectedRoutes: false,
+
+    show: false,
+
+    createMarker: function() {
+
+        return null;
+
+    }
+
+}).addTo(map);
+
+
+
+/* =========================
+   CARD ANIMATION
+========================= */
+
+document
+    .querySelectorAll(".card")
+    .forEach((card, index) => {
+
+        card.style.transitionDelay =
+            `${index * 0.1}s`;
+
+    });
+
+
+const observer =
+    new IntersectionObserver(
+
+        (entries) => {
+
+            entries.forEach(entry => {
+
+                if (entry.isIntersecting) {
+
+                    entry.target
+                        .classList
+                        .add("show");
+
+                }
+
+            });
+
+        },
+
+        {
+            threshold: 0.15
+        }
+
+    );
+
+
+document
+    .querySelectorAll(".card")
+    .forEach(card => {
+
+        observer.observe(card);
+
+    });
+
+
+
+/* =========================
+   GIFT MODAL
+========================= */
+
+function openGiftModal() {
 
     const modal =
         document.getElementById("giftModal");
 
-    modal.style.display = "flex";
+
+    modal.style.display =
+        "flex";
+
 
     setTimeout(() => {
+
         modal.classList.add("show");
+
     }, 10);
+
 }
 
-function closeGiftModal(){
+
+function closeGiftModal() {
 
     const modal =
         document.getElementById("giftModal");
+
 
     modal.classList.remove("show");
 
+
     setTimeout(() => {
-        modal.style.display = "none";
+
+        modal.style.display =
+            "none";
+
     }, 400);
+
 }
 
-function copyIBAN(){
+
+/* =========================
+   COPY IBAN
+========================= */
+
+function copyIBAN() {
 
     const iban =
-        document.getElementById("ibanText").innerText;
+        document
+            .getElementById("ibanText")
+            .innerText;
 
-    navigator.clipboard.writeText(iban);
 
-    document.getElementById("copyMessage").innerText =
-        "✓ IBAN copiato negli appunti";
+    navigator.clipboard
+        .writeText(iban)
+        .then(() => {
+
+            document
+                .getElementById("copyMessage")
+                .innerText =
+                    "✓ IBAN copiato negli appunti";
+
+        });
+
 }
 
-window.onclick = function(event){
 
-    const modal =
-        document.getElementById("giftModal");
+/* =========================
+   CLOSE MODAL OUTSIDE
+========================= */
 
-    if(event.target === modal){
-        closeGiftModal();
+window.addEventListener(
+    "click",
+    function(event) {
+
+        const modal =
+            document.getElementById("giftModal");
+
+
+        if (event.target === modal) {
+
+            closeGiftModal();
+
+        }
+
     }
-}
+);
+
+
+/* =========================
+   HERO FADE ON SCROLL
+========================= */
+
+window.addEventListener(
+    "scroll",
+    function() {
+
+        const heroOverlay =
+            document.querySelector(".hero-overlay");
+
+
+        const scrollY =
+            window.scrollY;
+
+
+        /*
+           Fino a 350px di scroll
+           l'hero si dissolve progressivamente.
+        */
+
+        const maxFade = 350;
+
+
+        const progress =
+            Math.min(
+                scrollY / maxFade,
+                1
+            );
+
+
+        /*
+           Opacità:
+           0px    = 100%
+           175px  = 50%
+           350px  = 0%
+        */
+
+        heroOverlay.style.opacity =
+            1 - progress;
+
+
+        /*
+           Leggero movimento verso l'alto
+           durante la dissolvenza.
+        */
+
+        heroOverlay.style.transform =
+            `translateY(${-progress * 60}px)`;
+
+    }
+);
 
 </script>
 
-<script>
-
-window.addEventListener("scroll", () => {
-
-    const heroOverlay =
-        document.querySelector(".hero-overlay");
-
-    const scrollY = window.scrollY;
-
-    const maxFade = 350;
-
-    const progress =
-        Math.min(scrollY / maxFade, 1);
-
-    heroOverlay.style.opacity =
-        1 - progress;
-
-    heroOverlay.style.transform =
-        `translateY(${-progress * 60}px)`;
-
-});
-
-</script>
-    
 </body>
 </html>
