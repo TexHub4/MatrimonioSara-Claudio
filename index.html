@@ -362,6 +362,75 @@ body{
         opacity:0;
     }
 }
+
+
+/* Sezione FAQ */
+.faq-card {
+    padding: 35px 40px;
+}
+
+.faq-list {
+    max-width: 680px;
+    margin: 28px auto 0;
+    text-align: left;
+}
+
+.faq-item {
+    padding: 0 0 22px;
+    margin-bottom: 22px;
+    border-bottom: 1px solid rgba(168, 138, 99, 0.22);
+}
+
+.faq-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 5px;
+}
+
+.faq-item h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.08rem;
+    font-weight: 600;
+    line-height: 1.5;
+    color: #8f7350;
+    margin-bottom: 8px;
+}
+
+.faq-item p {
+    font-size: 0.98rem;
+    line-height: 1.8;
+    color: #444;
+    margin: 0;
+}
+
+.faq-footer {
+    margin: 28px auto 0 !important;
+    padding-top: 20px;
+    border-top: 1px solid rgba(168, 138, 99, 0.22);
+    font-style: italic;
+    color: #74634f;
+    text-align: center;
+}
+
+@media (max-width: 600px) {
+    .faq-card {
+        padding: 28px 20px;
+    }
+
+    .faq-list {
+        margin-top: 24px;
+    }
+
+    .faq-item h3 {
+        font-size: 1rem;
+    }
+
+    .faq-item p {
+        font-size: 0.94rem;
+        line-height: 1.75;
+    }
+}
+
 </style>
     <link rel="stylesheet"
 href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
@@ -610,37 +679,55 @@ In questo sito potete trovare le informazioni essenziali per partecipare al nost
     </a>
 </div>
 
-    <div class="card">
-        <h2>🤔 Ansie, dubbi e perplessità</h2>
-        <p>
-            1. D: Posso lanciare il riso?
+    
+<div class="card faq-card">
+    <h2>🤔 Ansie, dubbi e perplessità</h2>
 
-<br>
-            R: No, purtroppo nè riso nè petali potranno essere lanciati per disposizioni del parroco
+    <div class="faq-list">
 
-<br><br>
-            2. D: Posso portare via i fiori a fine cerimonia?
+        <div class="faq-item">
+            <h3>È possibile lanciare il riso?</h3>
+            <p>
+                No, purtroppo non sarà possibile lanciare né riso
+                né petali, per disposizione del parroco.
+            </p>
+        </div>
 
-<br>
-            R: No, ci penserà Annalisa (la fiorista) a sorprendervi
+        <div class="faq-item">
+            <h3>Possiamo portare via i fiori a fine cerimonia?</h3>
+            <p>
+                No, ci penserà Annalisa, la nostra fiorista,
+                a sorprendervi.
+            </p>
+        </div>
 
-<br><br>
-            3. D: Si possono fare foto?
+        <div class="faq-item">
+            <h3>Si possono fare fotografie durante la cerimonia?</h3>
+            <p>
+                Certamente! Vi chiediamo solo di prestare attenzione
+                all'uso del flash e, durante l'ingresso degli sposi,
+                di non intralciare la navata, così da consentire
+                al fotografo di svolgere al meglio il proprio lavoro.
+            </p>
+        </div>
 
-<br>
-            R: Sì, ma prestate attenzione all'uso dei flash durante la cerimonia. Durante gli ingressi degli sposi chiediamo la vostra collaborazione a non intralciare la navata per consentire la buona riuscita del lavoro del fotografo
+        <div class="faq-item">
+            <h3>C'è un orario limite per il ricevimento?</h3>
+            <p>
+                Sì, la musica terminerà alle 00:00 e sarà necessario
+                lasciare la location entro le 00:30, nel rispetto
+                delle disposizioni comunali.
+            </p>
+        </div>
 
-<br><br>
-            4. D: C'è un orario limite per il ricevimento?
-
-<br>
-            R: Sì, alle 00:00 verrà spenta la musica e al massimo alle 00:30 bisognerà lasciare la location per disposizioni comunali
-
-<br><br>
-            Per qualsiasi altro dubbio o necessità, non esitare a contattarci🤍 
-
-            
     </div>
+
+    <p class="faq-footer">
+        Per qualsiasi altro dubbio o necessità,
+        non esitate a contattarci 🤍
+    </p>
+</div>
+
 
 </div>
 
