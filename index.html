@@ -1033,10 +1033,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-document.querySelectorAll(".card").forEach(card => {
-    observer.observe(card);
-});
-
 </script>
 
 <div
@@ -1150,13 +1146,46 @@ async function copyIBAN() {
     }
 }
 
-document.addEventListener("click", event => {
-    const modal = document.getElementById("giftModal");
 
-    if (modal && event.target === modal) {
-        closeGiftModal();
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const cards = document.querySelectorAll(".card");
+
+    const reducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    // Mostra subito tutte le schede se le animazioni sono disattivate
+    // o se il browser non supporta IntersectionObserver.
+    if (reducedMotion || !("IntersectionObserver" in window)) {
+        cards.forEach(card => card.classList.add("show"));
+        return;
     }
+
+    // Mostra ogni scheda quando entra nell'area visibile.
+    const observer = new IntersectionObserver(
+        (entries, currentObserver) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("show");
+                    currentObserver.unobserve(entry.target);
+                }
+            });
+        },
+        {
+            threshold: 0.08,
+            rootMargin: "0px 0px -25px 0px"
+        }
+    );
+
+    cards.forEach((card, index) => {
+        card.style.transitionDelay =
+            `${Math.min(index * 70, 350)}ms`;
+
+        observer.observe(card);
+    });
 });
+</script>
 
 document.addEventListener("keydown", event => {
     const modal = document.getElementById("giftModal");
