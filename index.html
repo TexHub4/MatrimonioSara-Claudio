@@ -866,16 +866,21 @@ href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-mach
 
 </div>
 
-     <div class="card">
+     
+<div class="card">
     <h2>🎁 Lista nozze</h2>
 
     <p>
         Il nostro viaggio più bello comincia qui
     </p>
 
-    <a class="btn" onclick="openGiftModal()">
+    <button
+        type="button"
+        class="btn"
+        onclick="openGiftModal()"
+        aria-haspopup="dialog">
         🎁
-    </a>
+    </button>
 </div>
 
     
@@ -928,10 +933,6 @@ href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-mach
 </div>
 
 
-</div>
-
-<div class="footer">
-    Sara & Claudio • 27 Maggio 2027
 </div>
 
 <script>
@@ -1112,11 +1113,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
 </div>
 
-<script>
 
+<script>
 function openGiftModal() {
     const modal = document.getElementById("giftModal");
-
     if (!modal) return;
 
     modal.style.display = "flex";
@@ -1132,7 +1132,6 @@ function openGiftModal() {
 
 function closeGiftModal() {
     const modal = document.getElementById("giftModal");
-
     if (!modal) return;
 
     modal.classList.remove("show");
@@ -1150,7 +1149,6 @@ async function copyIBAN() {
     if (!ibanElement || !message) return;
 
     const iban = ibanElement.textContent.trim().replace(/\s+/g, "");
-
     message.textContent = "";
 
     try {
@@ -1169,9 +1167,7 @@ async function copyIBAN() {
             const copied = document.execCommand("copy");
             field.remove();
 
-            if (!copied) {
-                throw new Error("Copia non riuscita");
-            }
+            if (!copied) throw new Error("Copia non riuscita");
         }
 
         message.textContent = "✓ IBAN copiato negli appunti";
@@ -1181,6 +1177,22 @@ async function copyIBAN() {
     }
 }
 
+document.addEventListener("click", event => {
+    const modal = document.getElementById("giftModal");
+
+    if (modal && event.target === modal) {
+        closeGiftModal();
+    }
+});
+
+document.addEventListener("keydown", event => {
+    const modal = document.getElementById("giftModal");
+
+    if (event.key === "Escape" && modal && modal.style.display === "flex") {
+        closeGiftModal();
+    }
+});
+</script>
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
@@ -1190,14 +1202,11 @@ document.addEventListener("DOMContentLoaded", () => {
         "(prefers-reduced-motion: reduce)"
     ).matches;
 
-    // Mostra subito tutte le schede se le animazioni sono disattivate
-    // o se il browser non supporta IntersectionObserver.
     if (reducedMotion || !("IntersectionObserver" in window)) {
         cards.forEach(card => card.classList.add("show"));
         return;
     }
 
-    // Mostra ogni scheda quando entra nell'area visibile.
     const observer = new IntersectionObserver(
         (entries, currentObserver) => {
             entries.forEach(entry => {
@@ -1223,41 +1232,20 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 <script>
-
-document.addEventListener("keydown", event => {
-    const modal = document.getElementById("giftModal");
-
-    if (event.key === "Escape" && modal && modal.style.display === "flex") {
-        closeGiftModal();
-    }
-});
-
-</script>
-
-<script>
-
 window.addEventListener("scroll", () => {
+    const heroContent = document.querySelector(".hero-content");
+    const scrollDown = document.querySelector(".scroll-down");
 
-    const heroContent =
-        document.querySelector(".hero-content");
+    if (!heroContent || !scrollDown) return;
 
-    const scrollDown =
-        document.querySelector(".scroll-down");
-
-    if(window.scrollY > 150){
-
+    if (window.scrollY > 150) {
         heroContent.classList.add("fade-out");
         scrollDown.classList.add("fade-out");
-
-    }else{
-
+    } else {
         heroContent.classList.remove("fade-out");
         scrollDown.classList.remove("fade-out");
-
     }
-
 });
-
 </script>
     
 </body>
