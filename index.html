@@ -468,6 +468,33 @@ body{
     }
 }
 
+/* Correzione immagini a schermo intero su iPhone */
+@supports (-webkit-touch-callout: none) {
+  .hero,
+  .hero-slideshow {
+    height: 100vh;
+    height: 100svh;
+    min-height: 100vh;
+    min-height: 100svh;
+  }
+
+  .hero-slideshow {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .hero-slideshow .slide {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center center;
+  }
+}
+
 </style>
     <link rel="stylesheet"
 href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
