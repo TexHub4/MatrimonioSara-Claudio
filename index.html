@@ -6,13 +6,16 @@
 
 <title>Sara & Claudio - 27 Maggio 2027</title>
 
+<meta name="description" content="Sara e Claudio vi aspettano il 27 maggio 2027 per condividere il loro giorno speciale. Tutte le informazioni sul matrimonio, le location e la conferma di presenza.">
+<meta name="theme-color" content="#faf8f5">
+
 <link rel="icon" type="image/png" href="Favicon.png">
 <link rel="apple-touch-icon" href="Favicon.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap" rel="stylesheet">   
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Parisienne&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet"> 
 
 <link rel="icon" type="image/png" href="Favicon.png">
     
@@ -335,14 +338,31 @@ body{
     font-weight:500;
 }
 
-.slide{
-    position:absolute;
-    width:100%;
-    height:100%;
-    object-fit:cover;
+.slide {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    opacity: 0;
+    animation: fade 30s infinite;
+}
 
-    opacity:0;
-    animation:fade 36s infinite;
+@keyframes fade {
+    0%   { opacity: 0; }
+    4%   { opacity: 1; }
+    19%  { opacity: 1; }
+    24%  { opacity: 0; }
+    100% { opacity: 0; }
+}
+
+@media (max-width: 600px) {
+    .hero,
+    .hero-overlay {
+        height: 100vh;
+        height: 100svh;
+    }
 }
 
 @keyframes fade{
@@ -449,46 +469,6 @@ href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
     .leaflet-routing-container{
     display:none !important;
 }
-.card{
-    background:rgba(255,255,255,0.90);
-    backdrop-filter:blur(20px);
-
-    border:1px solid rgba(255,255,255,0.35);
-
-    border-radius:20px;
-
-    padding:25px 35px;
-    margin-bottom:25px;
-
-    box-shadow:
-        0 8px 25px rgba(0,0,0,.05),
-        0 2px 8px rgba(168,138,99,.08);
-
-    text-align:center;
-
-    opacity:0;
-    transform:translateY(60px);
-
-    transition:
-        opacity 1s ease,
-        transform 1s ease,
-        box-shadow .3s ease;
-}
-
-.card.show{
-    opacity:1;
-    transform:translateY(0);
-}
-    .card:hover{
-    transform:translateY(-4px);
-    box-shadow:
-        0 15px 35px rgba(0,0,0,.08);
-}
-    .card p{
-    max-width:700px;
-    margin:0 auto;
-    line-height:1.7;
-}
     .scroll-down{
     cursor:pointer;
     position:absolute;
@@ -518,6 +498,188 @@ href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
         transform:translateX(-50%) translateY(-5px);
     }
 }
+
+
+:root {
+    --page-bg: #faf8f5;
+    --text-main: #38332e;
+    --text-muted: #746b63;
+    --accent: #a88a63;
+    --accent-border: rgba(168, 138, 99, 0.24);
+    --card-bg: rgba(255, 255, 255, 0.92);
+    --card-shadow: 0 8px 28px rgba(54, 43, 32, 0.07);
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: var(--page-bg);
+    color: var(--text-main);
+}
+
+.card {
+    width: 100%;
+    padding: 28px 32px;
+    margin-bottom: 25px;
+    text-align: center;
+
+    background: var(--card-bg);
+    border: 1px solid var(--accent-border);
+    border-radius: 20px;
+    box-shadow: var(--card-shadow);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+
+    opacity: 0;
+    transform: translateY(20px);
+
+    transition:
+        opacity 650ms ease,
+        transform 650ms ease,
+        box-shadow 250ms ease;
+}
+
+.card.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.card p {
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.75;
+}
+
+.card h2 {
+    margin-bottom: 15px;
+    font-family: 'Playfair Display', serif;
+    font-weight: 500;
+}
+
+.card h2::after {
+    content: "";
+    display: block;
+    width: 54px;
+    height: 2px;
+    margin: 12px auto 0;
+    background: var(--accent);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .card.show:hover {
+        box-shadow: 0 13px 32px rgba(54, 43, 32, 0.10);
+    }
+}
+
+.btn {
+    display: block;
+    width: 80%;
+    max-width: 400px;
+    margin: 15px auto 0;
+    padding: 15px 18px;
+
+    border: 1px solid transparent;
+    border-radius: 12px;
+
+    background: var(--accent);
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font: inherit;
+    font-weight: 500;
+    letter-spacing: 0.2px;
+
+    cursor: pointer;
+
+    transition:
+        background-color 200ms ease,
+        box-shadow 200ms ease,
+        transform 200ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .btn:hover {
+        background: #92764f;
+        box-shadow: 0 7px 18px rgba(0, 0, 0, 0.12);
+        transform: translateY(-2px);
+    }
+}
+
+.btn:focus-visible,
+a:focus-visible,
+button:focus-visible,
+.scroll-down:focus-visible,
+.close-modal:focus-visible {
+    outline: 3px solid #6f5636;
+    outline-offset: 4px;
+}
+
+@media (max-width: 600px) {
+    .container {
+        margin-top: 65px;
+        padding: 0 14px 28px;
+    }
+
+    .card {
+        padding: 23px 18px;
+        margin-bottom: 18px;
+        border-radius: 16px;
+    }
+
+    .btn {
+        width: 100%;
+        padding: 14px;
+    }
+
+    #map {
+        width: 100%;
+        height: 340px;
+    }
+
+    .hero h1 {
+        max-width: 95vw;
+        font-size: clamp(3.2rem, 12vw, 5rem);
+    }
+
+    .hero-date {
+        letter-spacing: 2px;
+    }
+
+    .countdown {
+        padding: 0 12px;
+        font-size: 0.9rem;
+        line-height: 1.7;
+    }
+
+    .footer {
+        padding: 30px 16px;
+    }
+
+    .modal-content {
+        max-height: 85vh;
+        overflow-y: auto;
+        padding: 38px 22px 25px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .card {
+        transform: none;
+    }
+
+    .card:not(.show) {
+        opacity: 1;
+    }
+}
+
 </style>
     <link rel="stylesheet"
 href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css">
@@ -562,20 +724,28 @@ href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-mach
 </section>
 <div class="container">
 
-    <div class="card">
-        <h2>Benvenuti</h2>
-        <p>
-            Siamo felici di condividere con voi il nostro giorno speciale
+   
+<div class="card">
+    <h2>Benvenuti</h2>
 
-<br><br>
+    <p>
+        Siamo felici di condividere con voi il nostro giorno speciale.
+    </p>
 
-<span class="welcome-date">
-    Giovedì 27 Maggio 2027 🤍
-</span>
+    <br>
 
-<br>
-In questo sito potete trovare le informazioni essenziali per partecipare al nostro giorno più bello
-    </div>
+    <span class="welcome-date">
+        Giovedì 27 maggio 2027 🤍
+    </span>
+
+    <br><br>
+
+    <p>
+        In questo sito potete trovare le informazioni essenziali
+        per partecipare al nostro giorno più bello.
+    </p>
+</div>
+
 
    <div class="card">
     <h2>📍 Luoghi del matrimonio</h2>
@@ -843,23 +1013,41 @@ L.Routing.control({
 
     <script>
 
-document.querySelectorAll(".card").forEach((card, index) => {
 
-    card.style.transitionDelay = `${index * 0.1}s`;
+document.addEventListener("DOMContentLoaded", () => {
+    const cards = document.querySelectorAll(".card");
 
-});
+    const reducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+    ).matches;
 
-const observer = new IntersectionObserver((entries) => {
+    if (
+        reducedMotion ||
+        !("IntersectionObserver" in window)
+    ) {
+        cards.forEach(card => card.classList.add("show"));
+        return;
+    }
 
-    entries.forEach(entry => {
-
-        if(entry.isIntersecting){
-            entry.target.classList.add("show");
-        }
-
+    const observer = new IntersectionObserver((entries, currentObserver) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("show");
+                currentObserver.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.08,
+        rootMargin: "0px 0px -25px 0px"
     });
 
-},{
+    cards.forEach((card, index) => {
+        card.style.transitionDelay = `${Math.min(index * 70, 350)}ms`;
+        observer.observe(card);
+    });
+});
+        
+{
     threshold:0.15
 });
 
@@ -869,7 +1057,13 @@ document.querySelectorAll(".card").forEach(card => {
 
 </script>
 
-<div id="giftModal" class="modal">
+<div
+    id="giftModal"
+    class="modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="giftModalTitle"
+>
 
     <div class="modal-content">
 
@@ -877,7 +1071,7 @@ document.querySelectorAll(".card").forEach(card => {
             &times;
         </span>
 
-        <h2>🤍 Grazie 🤍</h2>
+        <h2 id="giftModalTitle">🤍 Grazie 🤍</h2>
 
         <p>
             Il nostro viaggio più bello comincia qui. Se desiderate farci un dono potete contribuire alla realizzazione della nostra luna di miele
@@ -901,50 +1095,88 @@ document.querySelectorAll(".card").forEach(card => {
 
 <script>
 
-function openGiftModal(){
+function openGiftModal() {
+    const modal = document.getElementById("giftModal");
 
-    const modal =
-        document.getElementById("giftModal");
+    if (!modal) return;
 
     modal.style.display = "flex";
+    document.body.style.overflow = "hidden";
 
-    setTimeout(() => {
+    requestAnimationFrame(() => {
         modal.classList.add("show");
-    }, 10);
+    });
+
+    const closeButton = modal.querySelector(".close-modal");
+    if (closeButton) closeButton.focus();
 }
 
-function closeGiftModal(){
+function closeGiftModal() {
+    const modal = document.getElementById("giftModal");
 
-    const modal =
-        document.getElementById("giftModal");
+    if (!modal) return;
 
     modal.classList.remove("show");
+    document.body.style.overflow = "";
 
-    setTimeout(() => {
+    window.setTimeout(() => {
         modal.style.display = "none";
-    }, 400);
+    }, 450);
 }
 
-function copyIBAN(){
+async function copyIBAN() {
+    const ibanElement = document.getElementById("ibanText");
+    const message = document.getElementById("copyMessage");
 
-    const iban =
-        document.getElementById("ibanText").innerText;
+    if (!ibanElement || !message) return;
 
-    navigator.clipboard.writeText(iban);
+    const iban = ibanElement.textContent.trim().replace(/\s+/g, "");
 
-    document.getElementById("copyMessage").innerText =
-        "✓ IBAN copiato negli appunti";
-}
+    message.textContent = "";
 
-window.onclick = function(event){
+    try {
+        if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(iban);
+        } else {
+            const field = document.createElement("textarea");
+            field.value = iban;
+            field.setAttribute("readonly", "");
+            field.style.position = "fixed";
+            field.style.left = "-9999px";
 
-    const modal =
-        document.getElementById("giftModal");
+            document.body.appendChild(field);
+            field.select();
 
-    if(event.target === modal){
-        closeGiftModal();
+            const copied = document.execCommand("copy");
+            field.remove();
+
+            if (!copied) {
+                throw new Error("Copia non riuscita");
+            }
+        }
+
+        message.textContent = "✓ IBAN copiato negli appunti";
+    } catch (error) {
+        message.textContent =
+            "Copia non riuscita. Seleziona e copia l'IBAN manualmente.";
     }
 }
+
+document.addEventListener("click", event => {
+    const modal = document.getElementById("giftModal");
+
+    if (modal && event.target === modal) {
+        closeGiftModal();
+    }
+});
+
+document.addEventListener("keydown", event => {
+    const modal = document.getElementById("giftModal");
+
+    if (event.key === "Escape" && modal && modal.style.display === "flex") {
+        closeGiftModal();
+    }
+});
 
 </script>
 
